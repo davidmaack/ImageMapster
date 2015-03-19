@@ -843,14 +843,21 @@
                     dataItem.href=href;
                 }
 
+                var clickEventType = ((document.ontouchstart!==null)?'click':'touchstart');
+                
                 if (!mapArea.nohref) {
-                    $area.bind('click.mapster', me.click)
-                        .bind('mouseover.mapster', me.mouseover)
-                        .bind('mouseout.mapster', me.mouseout)
-                        .bind('mousedown.mapster', me.mousedown);
-                        
-                    
-                        
+                    //bind only core events for touch screens
+                    if (clickEventType === 'touchstart') {
+                        $area.bind('click.mapster', me.click)
+                            .bind('mousedown.mapster', me.mousedown);                        
+                    }
+                    //bind all events for devices with mouseover/mouseout
+                    else {
+                        $area.bind('click.mapster', me.click)
+                            .bind('mouseover.mapster', me.mouseover)
+                            .bind('mouseout.mapster', me.mouseout)
+                            .bind('mousedown.mapster', me.mousedown);
+                    }
                 }
 
                 // store an ID with each area. 
