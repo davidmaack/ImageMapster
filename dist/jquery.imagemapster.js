@@ -862,6 +862,7 @@ A jQuery plugin to enhance image maps.
         },
         defaults: {
             clickNavigate: false,
+            openLinkInNewTab: false,
             wrapClass: null,
             wrapCss: null,
             onGetList: null,
@@ -2909,6 +2910,10 @@ A jQuery plugin to enhance image maps.
         mousedown.call(this,e);
 
         if (opts.clickNavigate && ar.href) {
+            if (opts.openLinkInNewTab) {
+                window.open(ar.href);
+	        return;
+	    }
             window.location.href=ar.href;
             return;
         }
